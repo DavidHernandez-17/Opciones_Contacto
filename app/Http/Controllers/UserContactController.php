@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserContact;
-use App\Http\Requests\StoreUserContactRequest;
-use App\Http\Requests\UpdateUserContactRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class UserContactController extends Controller
@@ -31,7 +30,7 @@ class UserContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserContactRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -64,14 +63,14 @@ class UserContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserContactRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'subject' => 'required',
-            'message' => 'required',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required',
+        //     'subject' => 'required',
+        //     'message' => 'required',
+        // ]);
 
         $user_contact = UserContact::find($id);
         $user_contact->fill($request->input())->saveOrFail();
